@@ -1,9 +1,0 @@
-PAN (Primary Account Number): O número da conta ou do cartão utilizado para a transação
-
-ADV REASON: Indica um motivo para o ajuste ou aconselhamento da transação. Pode estar relacionado a uma diferença de valores
-
-ORG DATE: Data original da transação
-
-ORG AMT: Valor da transação
-
-ACQ INST NAME: Nome da instituição
