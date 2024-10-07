@@ -5,11 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Response Email</title>
     <style>
-        /* TODO: Definir estilos aqui */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: "Montserrat", system-ui;
+        }
+
+        h1, h2, p {
+            color: #2c2c2c
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 0.75rem;
+            color: #3f3f3f
+        }
+
+        button {
+            padding: 0 1em;
+            background-color: #00CC65;
+            height: 40px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border: none;
+            text-transform: uppercase;
+            color: #fefefe;
+        }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-    <h1>Layout de reapresentação disponível</h1>
+    <h1>Novo Layout de reapresentação disponível - {{current_date.strftime('%d/%m/%Y')}}</h1>
     <h2>Foram processadas {{responses_count}} respostas</h2>
+    <p>Prontinho, agora você pode analisar o relatório em um formato mais amigável!</p>
+    <a href="https://asimovbot.atlassian.net/l/cp/oiYq1Amm"><button>Mais sobre o Bot</button></a>
 </body>
 </html>

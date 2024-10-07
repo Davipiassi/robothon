@@ -44,12 +44,15 @@ class EmailSender:
         if not self.server:
             raise Exception('No SMTP server connected')
         
-        message = MIMEMultipart()
-        message['From'] = self.email
-        message['To'] = self.setup_message_receivers(receivers)
-        message['Subject'] = subject
-        
-        self.setup_message_html_content(message, content)
-        self.setup_message_files(message, files)
-        
-        self.server.sendmail(self.email, receivers, message.as_string())
+        try:
+            message = MIMEMultipart()
+            message['From'] = self.email
+            message['To'] = self.setup_message_receivers(receivers)
+            message['Subject'] = subject
+            
+            self.setup_message_html_content(message, content)
+            self.setup_message_files(message, files)
+            
+            self.server.sendmail(self.email, receivers, message.as_string())
+        except Exception as e:
+            raise

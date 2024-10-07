@@ -2,6 +2,7 @@ from botcity.maestro import *
 from email_sender import EmailSender
 from jinja2 import Environment, FileSystemLoader
 import re
+from datetime import datetime
 import pandas as pd
 
 BotMaestroSDK.RAISE_NOT_CONNECTED = False
@@ -54,6 +55,7 @@ def main():
         email = EmailSender('asimovreportbot@gmail.com', 'jltw nmpz suos romk')
         email.connect()
         email_content = setup_html_template('email.html', {
+            'current_date': datetime.now(),
             'responses_count': len(report_data['PAN'])
         })            
         email.send_email(
@@ -79,10 +81,18 @@ def main():
             processed_items=len(report_data['PAN']),
             failed_items=len(pan_codes) - len(report_data['PAN'])
         )
+    except FileNotFoundError as e:
+        maestro.alert(
+            task_id=execution.task_id,
+            title='O arquivo não foi encontrado!',
+            message=e,
+            alert_type=AlertType.ERROR
+        )
+    
     except Exception as e:
         maestro.alert(
             task_id=execution.task_id,
-            title='Bot Execution Interrupted',
+            title='Execução interrompida por erro!',
             message=e,
             alert_type=AlertType.ERROR
         )
@@ -103,7 +113,7 @@ def post_excel_artifact(maestro, task_id, path):
         task_id=task_id,
         artifact_name='Layout de Reapresentação.xlsx',
         filepath=path
-    )
+    )            
     
 def setup_html_template(template, arguments):
     env = Environment(loader=FileSystemLoader('resources/templates'))
